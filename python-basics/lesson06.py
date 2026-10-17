@@ -6,4 +6,6 @@ with open("student.txt", "w", encoding="utf-8") as file:
 with open("student.txt", "r", encoding="utf-8") as file:
     content = file.read()
 
-print(content)
+print("Student information from file:")
+print("name: " + content.splitlines()[0])
+print("course: " + content.splitlines()[1])
