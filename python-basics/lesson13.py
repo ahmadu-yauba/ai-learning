@@ -28,6 +28,7 @@ while choice != "4":
     print("2. Show students")
     print("3. Search student")
     print("4. Exit")
+    print("5. Delete student")
 
     choice = input("Choose an option: ")
 
@@ -90,6 +91,31 @@ while choice != "4":
 
     elif choice == "4":
         print("Program closed.")
+
+
+     
+    elif choice == "5":
+        name_to_delete = input("Enter the student name to delete: ").strip()
+
+        found = False
+
+        for student in students:
+            if student["name"].lower() == name_to_delete.lower():
+                students.remove(student)
+                found = True
+                break
+
+        if found:
+            with open("students.txt", "w", encoding="utf-8") as file:
+                for student in students:
+                    file.write(f'{student["name"]},{student["age"]}\n')
+
+            print("Student deleted successfully!")
+
+        else:
+            print("Student not found.")
+
+
 
     else:
         print("Invalid option!")
