@@ -29,6 +29,7 @@ while choice != "4":
     print("3. Search student")
     print("4. Exit")
     print("5. Delete student")
+    print("6. Update student")
 
     choice = input("Choose an option: ")
 
@@ -113,6 +114,50 @@ while choice != "4":
             print("Student deleted successfully!")
 
         else:
+            print("Student not found.")
+
+
+    
+    elif choice == "6":
+        name_to_update = input("Enter the student name to update: ").strip()
+
+        found = False
+
+        for student in students:
+            if student["name"].lower() == name_to_update.lower():
+                print("Current name:", student["name"])
+                print("Current age:", student["age"])
+
+                new_name = input("Enter new name: ").strip()
+
+                try:
+                    new_age = int(input("Enter new age: "))
+
+                    if not new_name:
+                        print("Name cannot be empty.")
+
+                    elif new_age <= 0:
+                        print("Age must be greater than zero.")
+
+                    else:
+                        student["name"] = new_name
+                        student["age"] = new_age
+
+                        with open("students.txt", "w", encoding="utf-8") as file:
+                            for item in students:
+                                file.write(f'{item["name"]},{item["age"]}\n')
+
+                        print("Student updated successfully!")
+
+                    found = True
+                    break
+
+                except ValueError:
+                    print("Invalid age! Please enter a whole number.")
+                    found = True
+                    break
+
+        if not found:
             print("Student not found.")
 
 
